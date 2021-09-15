@@ -36,7 +36,7 @@ const validate = function (nameValue, urlValue) {
     }
 
     if (urlValue.match(regex)) {
-
+        // *Continue
     }
     else {
         alert('Please!provide a valid web address');
@@ -46,50 +46,49 @@ const validate = function (nameValue, urlValue) {
 }
 
 //*Delete Bookmark
-const deleteBookmark=function(url){
-    bookmarks.forEach((bookmark,i)=>{
-     if(bookmark.url===url)
-     {
-         bookmarks.splice(i,1);
-     }
+const deleteBookmark = function (url) {
+    bookmarks.forEach((bookmark, i) => {
+        if (bookmark.url === url) {
+            bookmarks.splice(i, 1);
+        }
     });
 
     //* Update bookmarks array in localStorage,re-populate DOM
-    localStorage.setItem('bookmarks',JSON.stringify(bookmarks));
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     fetchBookmarks();
 }
 
 //* Build   Bookmarks DOM
 const buildBookmarks = function () {
-            //* Remove all bookmark elements
-            bookmarksContainer.textContent=' ';
+    //* Remove all bookmark elements
+    bookmarksContainer.textContent = ' ';
     //*Build Items
     bookmarks.forEach((bookmark) => {
-                const { name, url }=bookmark;
+        const { name, url } = bookmark;
         //* Item
-        const item=document.createElement('div');
+        const item = document.createElement('div');
         item.classList.add('item');
 
         //*Close
-        const closeIcon=document.createElement('i');
-        closeIcon.classList.add('fas','fa-trash');
-        closeIcon.setAttribute('titile','Delete Bookmark');
-        closeIcon.setAttribute('onclick',`deleteBookmark('${url}')`);
+        const closeIcon = document.createElement('i');
+        closeIcon.classList.add('fas', 'fa-trash');
+        closeIcon.setAttribute('titile', 'Delete Bookmark');
+        closeIcon.setAttribute('onclick', `deleteBookmark('${url}')`);
 
         //* favicon/Link Container
-        const linkInfo=document.createElement('div');
+        const linkInfo = document.createElement('div');
         linkInfo.classList.add('name');
-        const favicon=document.createElement('img');
-        favicon.setAttribute('src',`http://www.google.com/s2/favicons?domain=${url}/`);
-        favicon.setAttribute('alt','Favicon');
+        const favicon = document.createElement('img');
+        favicon.setAttribute('src', `http://www.google.com/s2/favicons?domain=${url}/`);
+        favicon.setAttribute('alt', 'Favicon');
         //* Anchor tag
-        const link=document.createElement('a');
-        link.setAttribute('href',`${url}`);
-        link.setAttribute('target','_blank');
-        link.textContent=name;
+        const link = document.createElement('a');
+        link.setAttribute('href', `${url}`);
+        link.setAttribute('target', '_blank');
+        link.textContent = name;
         //* Append to bookmarks Container
-        linkInfo.append(favicon,link);
-        item.append(closeIcon,linkInfo);
+        linkInfo.appendChild(favicon, link);
+        item.appendChild(closeIcon, linkInfo);
         bookmarksContainer.appendChild(item);
     });
 }
