@@ -87,8 +87,8 @@ const buildBookmarks = function () {
         link.setAttribute('target', '_blank');
         link.textContent = name;
         //* Append to bookmarks Container
-        linkInfo.appendChild(favicon, link);
-        item.appendChild(closeIcon, linkInfo);
+        linkInfo.append(favicon, link);
+        item.append(closeIcon, linkInfo);
         bookmarksContainer.appendChild(item);
     });
 }
